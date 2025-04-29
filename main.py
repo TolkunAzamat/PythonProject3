@@ -35,33 +35,6 @@ def annotate_sentence(sentence, sent_id, file_handle):
     i = 0
     token_id = 1
     while i < len(words):
-        # ҮЧ сөздүк айкашы
-        if i < len(words) - 2:
-            w1, w2, w3 = words[i], words[i+1], words[i+2]
-            print(f"👉 Бул 3 сөз бир мааниде колдонулганбы: “{w1} {w2} {w3}”? [Y/n]: ", end="")
-            answer = input().lower()
-            if answer in ["y", ""]:
-                # аннотация ар бири үчүн
-                lemma1 = input(f"  Лемма '{w1}' (Enter = {w1.lower()}): ") or w1.lower()
-                upos1 = input(f"  Теги '{w1}': ").upper()
-                feats1 = guess_derivation(w1.lower(), lemma1)
-
-                lemma2 = input(f"  Лемма '{w2}' (Enter = {w2.lower()}): ") or w2.lower()
-                upos2 = input(f"  Теги '{w2}': ").upper()
-                feats2 = guess_derivation(w2.lower(), lemma2)
-
-                lemma3 = input(f"  Лемма '{w3}' (Enter = {w3.lower()}): ") or w3.lower()
-                upos3 = input(f"  Теги '{w3}': ").upper()
-                feats3 = guess_derivation(w3.lower(), lemma3)
-
-                file_handle.write(f"{token_id}-{token_id+2}\t{w1} {w2} {w3}\t_\tMWE\t_\t_\t_\t_\t_\t_\n")
-                file_handle.write(f"{token_id}\t{w1}\t{lemma1}\t{upos1}\t_\t{feats1}\t_\t_\t_\t_\n")
-                file_handle.write(f"{token_id+1}\t{w2}\t{lemma2}\t{upos2}\t_\t{feats2}\t_\t_\t_\t_\n")
-                file_handle.write(f"{token_id+2}\t{w3}\t{lemma3}\t{upos3}\t_\t{feats3}\t_\t_\t_\t_\n")
-                i += 3
-                token_id += 3
-                continue
-
         # ЭКИ сөздүк айкашы
         if i < len(words) - 1:
             w1, w2 = words[i], words[i+1]
